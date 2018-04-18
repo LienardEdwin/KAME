@@ -9,52 +9,80 @@ use Symfony\Component\HttpFoundation\Response;
 class SupportController extends Controller
 {
     /**
-     * @Route("/support/submit", name="supportSubmit")
-     */
-    public function SubmitTicket()
-    {
-        return $this->render('support/index.html.twig', [
-            'controller_name' => 'Creer le Ticket',
-        ]);
-    }
-
-    /**
-     * Matches /support exactly
+     * Matches /support/close/*
      *
-     * @Route("/support", name="supportMessage")
+     * @Route("/support/{idT}/{idE}/{idR}/close", name="supportClose" ,  *
+     *     requirements={
+     *         "idR": "\d+",
+     *         "idE": "\d+",
+     *         "idT": "\d+"
+     *     })
      */
-    public function MessageTicket()
-    {
-        return $this->render('support/index.html.twig', [
-            'controller_name' => 'Ouvre le ticket',
-        ]);
-    }
-
-    /**
-     * @Route("/support/close", name="supportClose")
-     */
-    public function CloseTicket()
-    {
-        return $this->render('support/index.html.twig', [
-            'controller_name' => 'ferme le Ticket',
-        ]);
-    }
-
-    /**
-     * Matches /support/*
-     *
-     * @Route("/support/{slug}/{idE}/{idR}", name="supportIds")
-     */
-    public function idManager($slug,$idE,$idR)
+    public function CloseTicket($idT,$idE,$idR)
     {
         $messageTest = "<li>";
-        $messageTest .= $slug;
+        $messageTest .= $idT;
         $messageTest .= "</li>";
         $messageTest .= "<li>";
         $messageTest .= $idE;
         $messageTest .= "</li>";
         $messageTest .= "<li>";
         $messageTest .= $idR;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= "Ferme un ticket";
+        $messageTest .= "</li>";
+        return new Response("<body><ul>$messageTest</ul></body>");
+    }
+    /**
+     * Matches /support/message/*
+     *
+     * @Route("/support/{idT}/{idE}/{idR}/message", name="supportMessage" ,  *
+     *     requirements={
+     *         "idR": "\d+",
+     *         "idE": "\d+",
+     *         "idT": "\d+"
+     *     })
+     */
+    public function MessageTicket($idT,$idE,$idR)
+    {
+        $messageTest = "<li>";
+        $messageTest .= $idT;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= $idE;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= $idR;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= "Message ticket";
+        $messageTest .= "</li>";
+        return new Response("<body><ul>$messageTest</ul></body>");
+    }
+    /**
+     * Matches /support/submit/*
+     *
+     * @Route("/support/{idT}/{idE}/{idR}/submit", name="supportSubmit" ,  *
+     *     requirements={
+     *         "idR": "\d+",
+     *         "idE": "\d+",
+     *         "idT": "\d+"
+     *     })
+     */
+    public function SubmitTicket($idT,$idE,$idR)
+    {
+        $messageTest = "<li>";
+        $messageTest .= $idT;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= $idE;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= $idR;
+        $messageTest .= "</li>";
+        $messageTest .= "<li>";
+        $messageTest .= "Submit ticket";
         $messageTest .= "</li>";
         return new Response("<body><ul>$messageTest</ul></body>");
     }
